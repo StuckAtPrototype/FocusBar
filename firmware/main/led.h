@@ -25,7 +25,7 @@
 #define LED_COLOR_GREEN  0xFF0000  // Green
 #define LED_COLOR_BLUE   0x0000FF  // Blue
 #define LED_COLOR_YELLOW 0xFFFF00  // Yellow
-#define LED_COLOR_CYAN   0x00FFFF  // Cyan
+#define LED_COLOR_CYAN   0xFF00FF  // Cyan (Green + Blue)
 
 // LED system initialization and control functions
 /**

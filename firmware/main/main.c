@@ -103,15 +103,18 @@ void app_main(void)
         // Handle timer states
         switch (current_state) {
             case TIMER_STATE_IDLE:
-                // All LEDs off
-                led_clear_all();
+                // All LEDs light blue (Cyan) at 30% brightness
+                led_set_intensity(0.3f);
+                led_set_color(LED_COLOR_CYAN);
+                
                 if (piezo_is_playing()) {
                     piezo_stop();
                 }
                 break;
                 
             case TIMER_STATE_RUNNING: {
-                // Show progress bar
+                // Show progress bar at full brightness
+                led_set_intensity(1.0f);
                 float progress = timer_get_progress();
                 led_set_progress(progress, LED_COLOR_GREEN);
                 if (piezo_is_playing()) {
@@ -121,7 +124,8 @@ void app_main(void)
             }
             
             case TIMER_STATE_COMPLETED:
-                // Pulse LEDs to notify completion
+                // Pulse LEDs to notify completion (full brightness)
+                led_set_intensity(1.0f);
                 led_set_pulsing(LED_COLOR_GREEN, true);
                 if (piezo_is_playing()) {
                     piezo_stop();
@@ -130,6 +134,7 @@ void app_main(void)
                 
             case TIMER_STATE_GRACE_PERIOD:
                 // Keep pulsing during grace period
+                led_set_intensity(1.0f);
                 led_set_pulsing(LED_COLOR_GREEN, true);
                 if (piezo_is_playing()) {
                     piezo_stop();
@@ -138,6 +143,7 @@ void app_main(void)
                 
             case TIMER_STATE_ALERTING: {
                 // Pulse LEDs
+                led_set_intensity(1.0f);
                 led_set_pulsing(LED_COLOR_RED, true);
                 
                 // Play jingle every 2 seconds
